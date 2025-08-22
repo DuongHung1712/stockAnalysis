@@ -17,7 +17,6 @@ const auth = (req, res, next) => {
                     name: decoded.name,
                     createby: "DuongHung"
                 }
-                console.log("Decoded: ", decoded);
                 next();
             } catch (error) {
                 return res.status(401).json({
