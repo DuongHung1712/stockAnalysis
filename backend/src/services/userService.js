@@ -5,6 +5,13 @@ const jwt = require("jsonwebtoken");
 require ("dotenv").config();
 const createUserService = async (userName, email, password) => {
     try {
+        // Check user exist
+        const user = await User.findOne({email});
+        if (user) {
+            console.log("User already exists, please choose other email");
+            return null;
+        }
+
         //hash user password
         const hashedPassword = await bcrypt.hash(password,saltRounds);
         let result = await User.create({
@@ -70,10 +77,20 @@ const loginService = async (email, password) => {
         return null;
     }
 }
+const getUserService = async () => {
+    try {
+       
+        let result = await User.find({}).select("-password")
+        return result;
 
+    } catch (error) {
+        console.log(error);
+        return null;
+    }
+}
 
 
 
 module.exports = {
-    createUserService, loginService
+    createUserService, loginService, getUserService
 }
