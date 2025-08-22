@@ -1,6 +1,5 @@
 import Password from "antd/es/input/Password";
 import axios  from "./axios.customize";
-
 const createUserApi =  (userName, email, password) =>{
     const URL_API = "/v1/api/register"
     const data = {
@@ -18,8 +17,11 @@ const loginApi =  (email, password) =>{
     }
     return axios.post(URL_API, data)
 }
-
+const getUserApi = () =>{
+    const URL_API = "/v1/api/user"
+    return axios.get(URL_API)
+}
 
 export {
-    createUserApi, loginApi
+    createUserApi, loginApi, getUserApi
 }
